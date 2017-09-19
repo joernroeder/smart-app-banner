@@ -103,8 +103,15 @@ SmartBanner.prototype = {
 
 	create: function () {
 		var link = this.getStoreLink();
-		var inStore = this.options.price[this.type] + ' - ' + this.options.store[this.type];
+		var inStore = [];
 		var icon;
+
+		if (this.options.price[this.type]) {
+			inStore.push(this.options.price[this.type]);
+		}
+		if (this.options.store[this.type]) {
+			inStore.push(this.options.store[this.type]);
+		}
 
 		if (this.options.icon) {
 			icon = this.options.icon;
@@ -129,7 +136,7 @@ SmartBanner.prototype = {
 							'<div class="smartbanner-info">' +
 								'<div class="smartbanner-title">' + this.options.title + '</div>' +
 								'<div>' + this.options.author + '</div>' +
-								'<span>' + inStore + '</span>' +
+								(inStore.length ? '<span>' + inStore.join(' - ') + '</span>' : '') +
 							'</div>' +
 							'<a href="' + link + '" class="smartbanner-button">' +
 								'<span class="smartbanner-button-text">' + this.options.button + '</span>' +
