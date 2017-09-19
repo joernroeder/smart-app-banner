@@ -54,6 +54,7 @@ var SmartBanner = function (options) {
 			android: 'FREE',
 			windows: 'FREE'
 		},
+		useNativeBanner: true,
 		theme: '', // put platform type ('ios', 'android', etc.) here to force single theme on all device
 		icon: '', // full path to icon image if not using website icon image
 		force: '', // put platform type ('ios', 'android', etc.) here for emulation
@@ -82,7 +83,7 @@ var SmartBanner = function (options) {
 	var userDismissed = cookie.get('smartbanner-closed');
 	var userInstalled = cookie.get('smartbanner-installed');
 
-	if (unsupported || isMobileSafari || runningStandAlone || userDismissed || userInstalled) {
+	if (unsupported || (isMobileSafari && this.options.useNativeBanner) || runningStandAlone || userDismissed || userInstalled) {
 		return;
 	}
 
