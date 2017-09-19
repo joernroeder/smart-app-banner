@@ -18,7 +18,7 @@ var mixins = {
 		appMeta: 'apple-itunes-app',
 		iconRels: ['apple-touch-icon-precomposed', 'apple-touch-icon'],
 		getStoreLink: function () {
-			return 'https://itunes.apple.com/' + this.options.appStoreLanguage + '/app/id' + this.appId + "?mt=8";
+			return 'https://itunes.apple.com/' + this.options.appStoreLanguage + '/app/id' + this.appId + '?mt=8';
 		}
 	},
 	android: {
@@ -126,6 +126,10 @@ SmartBanner.prototype = {
 			}
 		}
 
+		this._buildHTML(icon, link, inStore);
+	},
+
+	_buildHTML: function (icon, link, inStore) {
 		var sb = doc.createElement('div');
 		var theme = this.options.theme || this.type;
 
@@ -143,6 +147,10 @@ SmartBanner.prototype = {
 							'</a>' +
 						'</div>';
 
+		this._appendTo(sb);
+	},
+
+	_appendTo: function (sb) {
 		// there isn’t neccessary a body
 		if (doc.body) {
 			doc.body.appendChild(sb);
@@ -152,6 +160,10 @@ SmartBanner.prototype = {
 			});
 		}
 
+		this._addEventListeners(sb);
+	},
+
+	_addEventListeners: function (sb) {
 		q('.smartbanner-button', sb).addEventListener('click', this.install.bind(this), false);
 		q('.smartbanner-close', sb).addEventListener('click', this.close.bind(this), false);
 	},
