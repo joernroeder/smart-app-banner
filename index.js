@@ -111,7 +111,7 @@ SmartBanner.prototype = {
 			if ('function' === typeof this.options.link[this.type]) {
 				link = this.options.link[this.type]();
 			}
-			else if ('string' === typeof this.options.storeLink[this.type]) {
+			else if ('string' === typeof this.options.link[this.type]) {
 				link = this.options.link[this.type];
 			}
 		}
