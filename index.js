@@ -102,9 +102,23 @@ SmartBanner.prototype = {
 	constructor: SmartBanner,
 
 	create: function () {
-		var link = this.getStoreLink();
 		var inStore = this.options.price[this.type] + ' - ' + this.options.store[this.type];
+		var link;
 		var icon;
+
+		// test provided link option
+		if (this.options.link && this.options.link[this.type]) {
+			if ('function' === typeof this.options.link[this.type]) {
+				link = this.options.link[this.type]();
+			}
+			else if ('string' === typeof this.options.storeLink[this.type]) {
+				link = this.options.link[this.type];
+			}
+		}
+		// if no function was provided or it returned undefined fall back to the default
+		if (!link) {
+			link = this.getStoreLink();
+		}
 
 		if (this.options.icon) {
 			icon = this.options.icon;
